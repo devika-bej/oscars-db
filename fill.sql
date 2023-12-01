@@ -72,7 +72,7 @@ CREATE TABLE `Artist` (
 
 LOCK TABLES `Artist` WRITE;
 /*!40000 ALTER TABLE `Artist` DISABLE KEYS */;
-INSERT INTO `Artist` VALUES (1,'Emilia Annis I. Jones','England','Actor'),(2,'Eugenio González Derbez','Mexico','Actor'),(3,'David Russell Strathairn','USA','Actor'),(4,'Lee Sun-kyun','South Korea','Actor'),(5,'Song Kang-ho','South Korea','Actor'),(6,'Viggo Peter Mortensen Jr.','USA','Actor'),(7,'Leonardo DiCaprio','USA','Actor'),(8,'Willard Carroll Smith II','USA','Actor'),(9,'Stephanie Beatriz','USA','Actor'),(10,'María Cecilia Botero','Colombia','Actor'),(11,'Thomas Jeffrey Hanks','USA','Actor'),(12,'Timothy Alan','USA','Actor'),(13,'Keanu Reeves','Canada','Actor'),(14,'Hailee Steinfeld','USA','Actor'),(15,'Ginnifer Goodwin','USA','Actor'),(16,'Idris Elba','England','Actor'),(17,'Amy Poehler','USA','Actor'),(18,'Kristen Bell','USA','Actor'),(19,'Idina Menzel','USA','Actor'),(20,'Rahul Sipligunj','India','Singer'),(21,'Billie Eilish','USA','Singer'),(22,'Kendrick Lamar','USA','Singer'),(23,'Carlos Rivera','Mexico','Singer'),(24,'Ryan Gosling','Canada','Mult'),(25,'Solána Imani Rowe','USA','Singer'),(26,'Chloé Zhao','China','Director'),(27,'Jane Campion','New Zealand','Director'),(28,'Daniels (Duo)','USA','Director'),(29,'Bong Joon-ho','South Korea','Director'),(30,'Guillermo del Toro','Mexico','Director'),(31,'Barry Jenkins','USA','Director'),(32,'Tom McCarthy','USA','Director');
+INSERT INTO `Artist` VALUES (1,'Emilia Annis I. Jones','England','Actor'),(2,'Eugenio González Derbez','Mexico','Actor'),(3,'David Russell Strathairn','USA','Actor'),(4,'Lee Sun-kyun','South Korea','Actor'),(5,'Song Kang-ho','South Korea','Actor'),(6,'Viggo Peter Mortensen Jr.','USA','Actor'),(7,'Leonardo DiCaprio','USA','Actor'),(8,'Willard Carroll Smith II','USA','Actor'),(9,'Stephanie Beatriz','USA','Actor'),(10,'María Cecilia Botero','Colombia','Actor'),(11,'Thomas Jeffrey Hanks','USA','Actor'),(12,'Timothy Alan','USA','Actor'),(13,'Keanu Reeves','Canada','Actor'),(14,'Hailee Steinfeld','USA','Actor'),(15,'Ginnifer Goodwin','USA','Actor'),(16,'Idris Elba','England','Actor'),(17,'Amy Poehler','USA','Actor'),(18,'Kristen Bell','USA','Actor'),(19,'Idina Menzel','USA','Actor'),(20,'Rahul Sipligunj','India','Singer'),(21,'Billie Eilish','USA','Singer'),(22,'Kendrick Lamar','USA','Singer'),(23,'Carlos Rivera','Mexico','Singer'),(24,'Ryan Gosling','Canada','Mult'),(25,'Solána Imani Rowe','USA','Singer'),(26,'Chloé Zhao','China','Director'),(27,'Jane Campion','New Zealand','Director'),(28,'Daniels (Duo)','USA','Director'),(29,'Bong Joon-ho','South Korea','Director'),(30,'Guillermo del Toro','Mexico','Director'),(31,'Barry Jenkins','USA','Director'),(32,'Tom McCarthy','USA','Director'),(33,'Jennifer Lee','USA','Director'),(34,'Peter Farrelly','USA','Director'),(35,'Sian Heder','USA','Director'),(36,'Peter Hans Docter','USA','Director'),(37,'Josh Cooley','USA','Director'),(38,'Peter Ramsey','USA','Director'),(39,'Rich Moore','USA','Director'),(40,'Jared Bush','USA','Director'),(41,'Chris Williams','Canada','Director'),(42,'Lee Edward Unkrich','USA','Director');
 /*!40000 ALTER TABLE `Artist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +201,7 @@ CREATE TABLE `Director` (
 
 LOCK TABLES `Director` WRITE;
 /*!40000 ALTER TABLE `Director` DISABLE KEYS */;
-INSERT INTO `Director` VALUES (26,'Female'),(27,'Female'),(28,'Male'),(29,'Male'),(30,'Male'),(31,'Male'),(32,'Male');
+INSERT INTO `Director` VALUES (26,'Female'),(27,'Female'),(28,'Male'),(29,'Male'),(30,'Male'),(31,'Male'),(32,'Male'),(33,'Female'),(34,'Male'),(35,'Female'),(36,'Male'),(37,'Male'),(38,'Male'),(39,'Male'),(40,'Male'),(41,'Male'),(42,'Male');
 /*!40000 ALTER TABLE `Director` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,8 +320,11 @@ CREATE TABLE `Movie` (
   `Gross_Income` int DEFAULT NULL,
   `Genre` varchar(25) DEFAULT NULL,
   `Result` int NOT NULL,
+  `Director_Id` int DEFAULT NULL,
   PRIMARY KEY (`Movie_Id`),
   KEY `Result` (`Result`),
+  KEY `Movie_Director_FK` (`Director_Id`),
+  CONSTRAINT `Movie_Director_FK` FOREIGN KEY (`Director_Id`) REFERENCES `Director` (`Artist_Id`),
   CONSTRAINT `Movie_ibfk_1` FOREIGN KEY (`Result`) REFERENCES `Result` (`Result_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -332,7 +335,7 @@ CREATE TABLE `Movie` (
 
 LOCK TABLES `Movie` WRITE;
 /*!40000 ALTER TABLE `Movie` DISABLE KEYS */;
-INSERT INTO `Movie` VALUES (20143,'Frozen',2013,150000000,1280000000,'Musical-Fantasy',2014301),(20153,'Big Hero 6',2014,165000000,657800000,'Superhero',2015301),(20161,'Spotlight',2015,20000000,98700000,'Biographical Drama',2016101),(20163,'Inside Out',2015,175000000,858800000,'Coming-of-Age',2016301),(20171,'Moonlight',2016,1500000,65200000,'Coming-of-Age',2017101),(20173,'Zootopia',2016,150000000,1025000000,'Cop Action Comedy',2017301),(20181,'The Shape of Water',2017,20000000,195300000,'Romantic-Fantasy',2018101),(20183,'Coco',2017,175000000,814300000,'Fantasy',2018301),(20191,'Green Book',2018,23000000,321800000,'Biographical Comedy-Drama',2019101),(20193,'Spider-Man: Into the Spider-Verse',2018,90000000,384300000,'Superhero',2019301),(20201,'Parasite',2019,15500000,262700000,'Comedy-Thriller',2020101),(20203,'Toy Story 4',2019,200000000,1073000000,'Comedy-Drama',2020301),(20211,'Nomadland',2020,5000000,39500000,'Drama',2021101),(20213,'Soul',2020,150000000,121000000,'Fantasy Comedy-Drama',2021301),(20221,'CODA',2021,10000000,2200000,'Comedy-Drama',2022101),(20223,'Encanto',2021,120000000,256800000,'Musical-Fantasy',2022301),(20231,'Everything Everywhere All at Once',2022,15000000,141200000,'Comedy',2023101),(20233,'Guillermo del \'s Pinocchio',2022,35000000,109846,'Musical-Fantasy',2023301);
+INSERT INTO `Movie` VALUES (20143,'Frozen',2013,150000000,1280000000,'Musical-Fantasy',2014301,33),(20153,'Big Hero 6',2014,165000000,657800000,'Superhero',2015301,41),(20161,'Spotlight',2015,20000000,98700000,'Biographical Drama',2016101,32),(20163,'Inside Out',2015,175000000,858800000,'Coming-of-Age',2016301,36),(20171,'Moonlight',2016,1500000,65200000,'Coming-of-Age',2017101,31),(20173,'Zootopia',2016,150000000,1025000000,'Cop Action Comedy',2017301,39),(20181,'The Shape of Water',2017,20000000,195300000,'Romantic-Fantasy',2018101,30),(20183,'Coco',2017,175000000,814300000,'Fantasy',2018301,42),(20191,'Green Book',2018,23000000,321800000,'Biographical Comedy-Drama',2019101,34),(20193,'Spider-Man: Into the Spider-Verse',2018,90000000,384300000,'Superhero',2019301,38),(20201,'Parasite',2019,15500000,262700000,'Comedy-Thriller',2020101,29),(20203,'Toy Story 4',2019,200000000,1073000000,'Comedy-Drama',2020301,37),(20211,'Nomadland',2020,5000000,39500000,'Drama',2021101,26),(20213,'Soul',2020,150000000,121000000,'Fantasy Comedy-Drama',2021301,36),(20221,'CODA',2021,10000000,2200000,'Comedy-Drama',2022101,35),(20223,'Encanto',2021,120000000,256800000,'Musical-Fantasy',2022301,40),(20231,'Everything Everywhere All at Once',2022,15000000,141200000,'Comedy',2023101,28),(20233,'Guillermo del \'s Pinocchio',2022,35000000,109846,'Musical-Fantasy',2023301,30);
 /*!40000 ALTER TABLE `Movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -566,4 +569,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 19:24:52
+-- Dump completed on 2023-12-02  1:52:09

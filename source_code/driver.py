@@ -6,6 +6,9 @@ import projection as proj
 import aggregate as agg
 import search as srch
 import analysis as ana
+import insert as inst
+import update as updt
+import delete as delt
 
 
 def retrieve():
@@ -34,7 +37,22 @@ def retrieve():
 
 
 def modify():
-    pass
+    with con.cursor() as cur:
+        com.clr_screen()
+        print("1 - insertion")
+        print("2 - updation")
+        print("3 - deletion")
+        ch = int(input("what kind of changes do you want to do? "))
+        match ch:
+            case 1:
+                inst.drive(con)
+            case 2:
+                updt.drive(con)
+            case 3:
+                delt.drive(con)
+            case _:
+                print("sorry, that is not a valid option")
+        com.cont()
 
 
 while 1:

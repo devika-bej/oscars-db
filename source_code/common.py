@@ -19,12 +19,18 @@ def display(ans):
         disp.add_row(list(row.values()))
     print(disp)
 
-def error(con,e):
+
+def error(con, e):
     con.rollback()
     print(e)
     print("sorry, smthn went wrong bro")
+
 
 def run(cur, query):
     cur.execute(query)
     return cur.fetchall()
 
+
+def modify(con, cur, query):
+    cur.execute(query)
+    con.commit()
