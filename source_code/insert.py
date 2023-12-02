@@ -52,7 +52,11 @@ def song(con, cur):
         print("enter the details for the new song")
         genre = int(input("genre id: "))
         title = input("title: ")
-        results = input("results (Winner or Nominated): ")
+        results = input("did they win (y or n): ")
+        if results == "y":
+            results = "Winner"
+        else:
+            results = "Nominated"
         year = int(input("year (yyyy): "))
         lang = input("language: ")
         query = (
