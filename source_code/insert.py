@@ -25,7 +25,6 @@ def ceremony(con, cur):
 def movie(con, cur):
     try:
         print("enter the details for the new movie")
-        movie = int(input("movie id (year + category): "))
         title = input("title: ")
         year = int(input("year (yyyy): "))
         budget = int(input("budget (in USD): "))
@@ -33,8 +32,7 @@ def movie(con, cur):
         genre = input("genre: ")
         result = input("result id: ")
         director = int(input("director id: "))
-        query = "insert into Movie values('%d','%s','%d','%d','%d','%s','%s','%d')" % (
-            movie,
+        query = "insert into Movie values('%s','%d','%d','%d','%s','%s','%d')" % (
             title,
             year,
             budget,
